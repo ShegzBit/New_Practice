@@ -1,0 +1,5 @@
+f = open('file.txt', 'w+')
+f.write("I love you\nI love you with all my life\n I will never fall out of love with you\n you're the love of my life \n Dear python\n\t\t\tferanmi")
+f.seek(0)
+fContent = f.read()
+print(fContent)

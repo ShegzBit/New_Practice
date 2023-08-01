@@ -1,0 +1,27 @@
+/**
+ * pseudocode:
+ * crete handlers for c, s, d
+ * (completed)crete wrppers for the handlers that take and return uniform types and number of arguments
+ * (completed)create a struct with members char spec and handler pointers
+ * (completed)create an array of the struct
+ * (completed)create a master wrapper that takes the spec and returns the appropriate handler
+ * then create printf
+ * loop through each character and print 
+ * if % is met send the the character next to it to the master wrapper and handle the argument if and only if the next character 
+ * is not % else print %
+ * 
+ * 
+ * b specifier
+ * It has a minimum value of -9,223,372,036,854,775,808 and a maximum value of 
+ * 9,223,372,036,854,775,807 (inclusive). A 64-bit unsigned integer. It has a minimum value 
+ * of 0 and a maximum value of (2^64)-1 (inclusive).
+*/
+
+/**
+ * prototypes:
+ * int print_char(va_list ap);
+ * int print_str(va_list ap);
+ * int print_int(va_list ap);
+ * int put_int(int num);
+ * 
+*/

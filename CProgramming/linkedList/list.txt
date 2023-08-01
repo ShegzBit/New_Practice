@@ -1,0 +1,7 @@
+There are many more advanced problems that you can try to solve using singly linked lists, such as:
+
+Reversing a singly linked list iteratively or recursively.
+Detecting and removing cycles in a singly linked list using Floyd’s algorithm or hashing.
+Merging two sorted singly linked lists into one sorted list.
+Splitting a singly linked list into two halves using slow and fast pointers.
+Finding the middle element, the nth element from the end, or the intersection point of two singly linked lists.

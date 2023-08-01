@@ -1,0 +1,12 @@
+create a function to handle each calculation
+create a struct of operator and function
+create a function to hand pick the right function
+take the numbers by main arguments
+handle for two numbers
+try ro handle for three numbers.
+
+code now complete for three numbers now to extend it for more variables
+use a while loop on the ac
+create 3 variables 3 steps from each other
+each represent the next 3 variables from the start
+create another variable and use it to store the result

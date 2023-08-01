@@ -1,0 +1,135 @@
+Write your own printf function:
+
+Create a man
+Print a simple character
+
+_printf("a");
+_printf("jrk %c")
+_printf(const char *format, ...);
+
+Print a string
+Handle %d
+Handle %x
+etc.
+
+
+To create a man page for a function you created, you can use a text editor to write the man page in the nroff format. This format is used to define the layout and content of the man page. Once you have written the man page, you can use the groff command to format and display it. Here is an example of a simple man page written in nroff format:
+
+.TH man 6 "30 Oct 2022" "1.0" "My Function man page"
+.SH NAME
+myfunction \- brief description of my function
+.SH SYNOPSIS
+.B myfunction
+.I parameter1
+.I parameter2
+.SH DESCRIPTION
+This is where you provide a detailed description of what your function does and how to use it.
+.SH OPTIONS
+This is where you list and describe any options that your function accepts.
+.SH EXAMPLES
+This is where you provide examples of how to use your function.
+.SH SEE ALSO
+This is where you can list related commands or functions.
+.SH BUGS
+This is where you can list any known bugs or issues with your function.
+.SH AUTHOR
+Your Name (your.email@example.com)
+Copy
+Is there anything else you would like to know?
+
+create _putchar
+creat _puts
+create int to str converter
+create print int function
+create int to hexa
+create print hexa
+
+that's the link i sent it to you on telegram
+https://meet.google.com/zft-jvgc-toj
+
+int _printf(const char *fmt, ...)
+{
+    /**
+     * check if the current char is percentage
+     * switch for each specifier after the %
+     * call the app function
+    */
+   va_list ap;
+   va_start(ap, fmt);
+   int retval = 0;
+   int i = 0;
+
+    while (*fmt != '\0')
+    {
+        if (*fmt == '%')
+        {
+            switch (*(fmt + 1))
+            {
+                case 'c':
+                    retval += print_char(ap);
+                    fmt += 2;
+                    break;
+                case 's':
+                    retval += print_str(ap);  /* _printf("%c %s ope%%%%\n", 'a', "string"); */
+                    fmt += 2;
+                    break;
+                case '%':
+                    retval += _putchar('%');
+                    fmt += 2;
+                default:
+                        fmt++;
+                        break;      
+            }
+        }
+        
+        else
+        {
+            _putchar(*fmt);
+            retval++;
+            fmt++;
+        }
+    }
+    return (retval);
+}
+
+
+0. I'm not going anywhere. You can print that wherever you want to. I'm here and I'm a Spur for life
+mandatory
+Score: 93.51% (Checks completed: 93.51%)
+Write a function that produces output according to a format.
+
+Prototype: int _printf(const char *format, ...);
+Returns: the number of characters printed (excluding the null byte used to end output to strings)
+write output to stdout, the standard output stream
+format is a character string. The format string is composed of zero or more directives. See man 3 printf for more detail. You need to handle the following conversion specifiers:
+c
+s
+%
+You don’t have to reproduce the buffer handling of the C library printf function
+You don’t have to handle the flag characters
+You don’t have to handle field width
+You don’t have to handle precision
+You don’t have to handle the length modifiers
+
+pseudocode
+define and declare struct type with member char and pointer to function ...int print_char(char)
+int (*p)(char)(char)
+
+int main()
+{
+    // int i = _printf("%c %s ope%d%%\n", 'a', "string");
+    // printf("%d\n", i);
+    // int j = printf("%c %s ope%%%%\n", 'a', "string");
+    // printf("%d\n", j);
+    _printf("%%\n"); // should print a single % character
+    _printf("%c\n", 'A'); // should print the character A
+    _printf("%s\n", "Hello World"); // should print the string Hello World
+    _printf("%d\n", 123); // should print nothing since %d is not a supported format specifier
+    _printf("%c%s\n", 'A', "BCD"); // should print the string ABCD
+    _printf("%s%c\n", "ABC", 'D'); // should print the string ABCD
+    _printf("%%%c%s\n", 'A', "BCD"); // should print the string %ABCD
+    _printf("%%%s%c\n", "ABC", 'D'); // should print the string %ABCD
+
+   
+    return (0);
+}

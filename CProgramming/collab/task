@@ -1,0 +1,277 @@
+/*
+6. I will show you how great I am
+#advanced
+Score: 88.89% (Checks completed: 88.89%)
+Write a function that splits a string into words.
+
+Prototype: char **strtow(char *str);
+The function returns a pointer to an array of strings (words)
+Each element of this array should contain a single word, null-terminated
+The last element of the returned array should be NULL
+Words are separated by spaces
+Returns NULL if str == NULL or str == ""
+If your function fails, it should return NULL
+julien@ubuntu:~/0x0a. malloc, free$ cat 101-main.c
+#include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+/**
+ * print_tab - Prints an array of string
+ * @tab: The array to print
+ *
+ * Return: nothing
+ 
+void print_tab(char **tab)
+{
+    int i;
+
+    for (i = 0; tab[i] != NULL; ++i)
+    {
+        printf("%s\n", tab[i]);
+    }
+}
+
+/**
+ * main - check the code for ALX School students.
+ *
+ * Return: 1 if an error occurred, 0 otherwise
+ 
+int main(void)
+{
+    char **tab;
+
+    tab = strtow("      ALX School         #cisfun      ");
+    that was passed       ALX School         #cisfun      
+    but only the real words were added to the array and they were null teminated
+    if (tab == NULL)
+    {
+        printf("Failed\n");
+        return (1);
+    }
+    print_tab(tab);
+    refturn (0);
+}
+julien@ubuntu:~/0x0a. malloc, free$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 101-main.c 101-strtow.c -o strtow
+julien@ubuntu:~/0x0a. malloc, free$ ./strtow | cat -e
+ALX$
+School$
+#cisfun$
+over here
+
+
+correct!
+so first let's device a method to count the number of words in it negleting the space that seems easy right?
+
+what are we going to use it for?
+to know the space to allocate to the array of string if there are four words we allocate 5 if there are five we alllocate 6ff
+do you get??????
+
+yeah
+
+heres my code
+
+
+
+
+/**
+ 42  * row_num - Calculate number of each word separated by space in the string
+ 43  * @str: The string to be examined
+ 44  *
+ 45  * Return: number of each word separated by space in the string
+ 46  
+ 47 int row_num(char *str)
+ 48 {
+ 49         int i, count = 0;
+ 50         int alpha = 0;
+ 51
+ 52         for (i = 0; str[i]; i++)
+ 53         {
+ 54                 if (str[i] != ' ')
+ 55                 {
+ 56                         if (alpha == 0)
+ 57                                 count++;
+ 58                         alpha = 1;
+ 59                 }
+ 60                 else
+ 61                 {
+ 62                         alpha = 0;
+ 63                 }
+ 64         }
+ 65
+ 66         return (count);
+ 67 }
+
+ and this has worked...
+ okay so let me read and digest it
+ ok
+
+
+ i have here what i thint we should work on even before before any mem allocation
+
+this is the exact format bing wrote the code in
+when i write -> i mean over to you do you get?
+ok child
+
+
+smile
+lets continue please
+okay so what do you want us to work with?
+
+
+
+
+i want us to work on the following if it make sense or if its inline to the solution
+
+1. remove all the spaces
+2. only represent the string in it normal form
+
+like....."ALX SCHOOl #CISFUN"
+what do yu think?
+3. then we look for how to split them into an array. then we will use those lenghts..
+
+
+
+very splendid idea
+
+so to implement 1 ad to we would want to check if the character in the front and after is a space and the current char
+too is a space if so we remove it
+
+
+i have a pseudocode for that, but ive not written it. or test.#pragma endregion
+
+please i will have to go and pray
+
+lemme me give you the code on telegram ....
+okay
+
+
+julien@ubuntu:~/0x0a. malloc, free$
+
+
+
+the problem is to put/split any given string into an array neglecting any other characters around or that is within the given string.
+
+am i right?
+to an extent but the problem is to add each word so yes to an extent
+take a look at the example
+
+******************************************************************************************************************************
+in the pseudocode i can see stuffs like _ which is not concerned in this
+
+
+test = "     you   are    great"
+space = 0
+while i < lenght of test:
+    if str[i] == ' ' and not space:
+        str[i] = ''
+        i+=1
+        continue
+    if str[i] != ' ':
+        space = 1
+        i+=1
+        continue
+    else:
+        space = 0
+        i+=1
+
+it won't be possible to do char = ''
+so we have to create a sting to store it in
+/**
+ 70  * normal_len - calculate the normal length  a given string
+ 71  * @str: the string to get its normal lenght
+ 72  *
+ 73  * Return: the normal lenght of the given string
+ 74  */
+
+ /*test = "      you are"*/
+ 75 int normal_len(char *str)
+ 76 {
+ 77         int count = 0;
+ 78         int i;
+ 79         int blank = 0;
+ 80
+ 81         for (i = 0; str[i]; i++)
+ 82         {
+ 83                 if (str[i] == ' ')
+ 84                 {
+ 85                         if (blank == 1)
+ 86                         {
+ 87                                 count++;
+ 88                         }
+ 89                         blank = 0;
+ 90                 }
+ 91                 else
+ 92                 {
+ 93                         count++;
+ 94                         blank = 1;
+ 
+ 95                 }
+ 96         }
+ 97
+ 98         return (count);
+ 99 }
+
+
+
+
+/**
+115  * normalise - represent a given string in its normal form with only a blank
+116  * @str: the string to normalise
+117  *
+118  * Return: the normalise string
+119  */
+        /*test = "you are"*/
+120 char *normalise(char *str)
+121 {
+122         char *s;
+123         int i, j = 0;
+124         int blank = 0;
+125         int len;
+126
+127         len = normal_len(str);
+128         s = malloc(sizeof(char) * len + 1);
+129         if (s == NULL)
+130                 return (NULL);
+131
+132         for (i = 0; str[i]; i++)
+133         {
+134                 if (str[i] == ' ')
+135                 {
+136                         if (blank == 1)
+137                         {
+138                                 s[j++] = str[i];
+139                         }
+140                         blank = 0;
+141                 }
+142                 else
+143                 {
+144                         s[j++] = str[i];
+145                         blank = 1;
+                            continue;
+146                 }
+147         }
+148         s[j] = '\0';
+149
+150         return (s);
+}
+
+
+root@DESKTOP-95PLV4G:~/Personal-practice/CProgramming/collab# ./stw
+thy thw
+the  size   is  3
+str -> thy
+root@DESKTOP-95PLV4G:~/Personal-practice/CProgramming/collab# ./
+bash: ./: Is a directory
+root@DESKTOP-95PLV4G:~/Personal-practice/CProgramming/collab# ./stw
+table thj   dk
+the size is 5
+str -> table
+root@DESKTOP-95PLV4G:~/Personal-practice/CProgramming/collab# ./stw
+ant
+the size is 3
+str -> ant
+root@DESKTOP-95PLV4G:~/Personal-practice/CProgramming/collab# 
+ 
+
+
