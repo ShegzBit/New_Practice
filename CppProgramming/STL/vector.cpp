@@ -1,8 +1,5 @@
-#include <vector>
-#include <algorithm>
-#include <iostream>
+#include "structure.hpp"
 
-using std::vector;
 
 int main()
 {
@@ -54,21 +51,54 @@ int main()
 		std::cout << "\tAv -+-> " << *it << std::endl;
 	}
 
-	//Pop each elements
-	for (auto it = av.begin(); it != av.end(); it++)
+	//Pop each elements from behind
+	for (auto it = av.begin(); it != av.end();)
 	{
 		for (int a = 0; a < av.size(); a++)
 		{
 			std::cout << "\tAv -+-> " << av[a] << std::endl;
 		}
-		//av.pop_back();
+		std::cout << "Popped an element" << std::endl;
+		av.pop_back();
 	}
 
+	 av = {13, 2, 74, 51, 2, 81, 13, 5, 94, 2, 0, 8, 77, 6, 56, 89};
+
+	//After re-occupying vector
+	//Remove all element lesser than 46
 	std::cout << "Remove all elements less than 46\n";
-        for (auto a = av.begin(); a != av.end(); a++)
+        for (auto a = av.begin(); a != av.end();)
         {
 		if (*a <= 46)
 			av.erase(a);
-		std::cout << "\tAv -+-> " << *a << std::endl;
+		else
+		{
+			std::cout << "\tAv -+-> " << *a << std::endl;
+			a++;
+		}
         }
+
+	for (auto a : av)
+	{
+		std::cout << "Av -+-> " << a << " survived the test of time";
+		usleep(2000000);
+		std::cout << "\r" << std::flush;
+	}
+
+	std::cout << "\n";
+	
+
+	//Trying user defined datatype on vectors
+	vector<Person> people;
+	people.push_back(Person());
+	people.push_back(Person("Feranmi", 17, 'M'));
+	people.push_back(Person("Pelumi", 20, 'F'));
+	people.push_back(Person("Darasimi", 13, 'M'));
+	people.push_back(Person("Ibukun", 11, 'M'));
+
+	std::sort(people.begin(), people.end());
+	for (auto person : people)
+	{
+		std::cout << person.getName() << " is " << person.getAge() << " years old" <<std::endl;
+	}
 }
